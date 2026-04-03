@@ -15,15 +15,21 @@ public class SitoWeb {
 			System.out.println(incoming);
 			BufferedReader in = new BufferedReader(new InputStreamReader(incoming.getInputStream()));
 			PrintWriter out = new PrintWriter(incoming.getOutputStream(), true /* autoFlush */);
-			out.println("<HEAD></HEAD><BODY><P><b>Prima pagina HTML</b></P></BODY>");
-			out.println ();
-			out.println ();
+			out.println("HTTP/1.1 200 OK");
+			out.println("Content-Type: text/html");
+			out.println(); // riga vuota che separa header e body
+
+			out.println("<html>");
+			out.println("<head></head>");
+			out.println("<body>");
+			out.println("<p><b>Prima pagina HTML</b></p>");
+			out.println("</body>");
+			out.println("</html>");
+
 			while (true) {
 				String line = in.readLine();
 				out.println(line);
 			} // while
-			
-			//incoming.close();
 		} catch (Exception e) {
 			System.err.println(e);
 		}

@@ -28,6 +28,7 @@ public class EchoServer {
 				}
 			} // while
 			incoming.close();
+			System.out.println("Terminato");
 		} catch (Exception e) {
 			System.err.println(e);
 		}

@@ -17,13 +17,16 @@ public class EchoServerClientAd {
 			new MyReader(in).start();
 			Scanner sc = new Scanner(System.in);
 			
-			while(true){				
+			while(true) {
 				String line = sc.nextLine();
-				if(line.equals("EXIT"))
+				if (line.equals("EXIT")) {
+					out.println("BYE");
 					break;
+				}
 				out.println(line);
 			}
 
+			s.close();
 		} catch (IOException e) {
 			System.out.println("Error" + e);
 		}

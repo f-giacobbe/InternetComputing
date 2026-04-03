@@ -16,7 +16,7 @@ public class EchoServerClient {
 			out.println("Prova invio");
 			out.println("Prova(2) invio");
 			out.println("");
-			out.println();
+			out.println("BYE");
 			boolean more = true;
 			while (more) {
 				String line = in.readLine();

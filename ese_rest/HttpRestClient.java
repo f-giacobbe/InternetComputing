@@ -1,4 +1,4 @@
-package it.unical.dimes.reti.rest;
+package it.unical.dimes.reti.ese_rest;
 
 import org.apache.http.StatusLine;
 import org.apache.http.client.methods.*;
