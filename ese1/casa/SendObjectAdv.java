@@ -1,11 +1,12 @@
-package it.unical.dimes.reti.ese1.escasa;
+package it.unical.dimes.reti.ese1.casa;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
 
 public class SendObjectAdv {
     // Simulo un database

@@ -1,4 +1,4 @@
-package it.unical.dimes.reti.ese1.escasa;
+package it.unical.dimes.reti.ese1.casa;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
