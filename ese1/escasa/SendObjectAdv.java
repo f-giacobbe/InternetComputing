@@ -54,7 +54,7 @@ public class SendObjectAdv {
                 while (true) {
                     String line = in.readLine();
 
-                    if (line == null) {
+                    if (line == null || line.isEmpty()) {
                         break;
                     }
 
@@ -62,6 +62,10 @@ public class SendObjectAdv {
                     Studente studente = dbStudenti.get(matricola);
                     out.writeObject(studente);
                 }
+
+                out.close();
+                in.close();
+                incoming.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

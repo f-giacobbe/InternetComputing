@@ -32,6 +32,8 @@ public class Client {
                 }
             }
 
+            out.close();
+            in.close();
             s.close();
         } catch (IOException e) {
             System.err.println(e.getMessage());
