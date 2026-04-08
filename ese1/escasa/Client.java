@@ -24,7 +24,12 @@ public class Client {
 
                 out.println(line);    // Invio matricola
                 Studente studente = (Studente) in.readObject();
-                System.out.println(studente);
+
+                if (studente == null) {
+                    System.err.println("Siamo spiacenti ma non è presente nessun studente con la matricola inviata.");
+                } else {
+                    System.out.println(studente);
+                }
             }
 
             s.close();
