@@ -71,7 +71,6 @@ public class Nodo {
                 in.close();
                 out.close();
                 socket.close();
-                sc.close();
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
