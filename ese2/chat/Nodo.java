@@ -7,10 +7,10 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class Nodo {
     static final int PORT = 2222;
+    BufferedReader sc;
 
     Nodo() {
         new Ascolto().start();
@@ -41,74 +41,11 @@ public class Nodo {
         }
     }
 
-    class Ricezione extends Thread {
-        private BufferedReader in;
-        private Socket socket;
-        private PrintWriter out;
-
-        Ricezione(BufferedReader in, Socket socket, PrintWriter out) {
-            this.in = in;
-            this.socket = socket;
-            this.out = out;
-        }
-
-        @Override
-        public void run() {
-            try {
-                while (true) {
-                    String line = in.readLine();
-
-                    if (line == null || line.equals("BYE")) {
-                        break;
-                    }
-
-                    System.out.println(line);
-                }
-                in.close();
-                out.close();
-                System.out.printf("Connessione con %s terminata", socket);
-                socket.close();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    class Invio extends Thread {
-        private PrintWriter out;
-        private static Scanner sc = new Scanner(System.in);
-
-
-        Invio(PrintWriter out) {
-            this.out = out;
-        }
-
-        @Override
-        public void run() {
-            try {
-                String line;
-
-                while (true) {
-                    synchronized (sc) {
-                        line = sc.nextLine();
-                    }
-
-                    out.println(line);
-
-                    if (line.equals("BYE")) {
-                        break;
-                    }
-                }
-
-                out.close();
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
     class Chat extends Thread {
         private Socket socket;
+        private BufferedReader in;
+        private PrintWriter out;
+        private boolean terminata = false;
 
         Chat(Socket socket) {
             this.socket = socket;
@@ -119,13 +56,66 @@ public class Nodo {
             try {
                 System.out.println("Connessione stabilita con " + socket.toString());
 
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+                in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                out = new PrintWriter(socket.getOutputStream(), true);
 
-                new Ricezione(in, socket, out).start();
-                new Invio(out).start();
-            } catch (IOException e) {
+                Thread ricezione = new Ricezione();
+                Thread invio = new Invio();
+
+                ricezione.start();
+                invio.start();
+                ricezione.join();
+                invio.join();
+
+                System.out.printf("Connessione con %s terminata", socket);
+                in.close();
+                out.close();
+                socket.close();
+                sc.close();
+            } catch (Exception e) {
                 throw new RuntimeException(e);
+            }
+        }
+
+        class Ricezione extends Thread {
+            @Override
+            public void run() {
+                try {
+                    while (!terminata) {
+                        String line = in.readLine();
+
+                        if (line == null || line.equals("BYE")) {
+                            terminata = true;
+                        }
+
+                        System.out.println(line);
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        class Invio extends Thread {
+            @Override
+            public void run() {
+                try {
+                    sc = new BufferedReader(new InputStreamReader(System.in));
+
+                    while (!terminata) {
+                        if (sc.ready()) {
+                            String line = sc.readLine();
+
+                            out.println(line);
+
+                            if (line.equals("BYE")) {
+                                terminata = true;
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
