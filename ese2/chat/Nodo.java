@@ -85,6 +85,7 @@ public class Nodo {
 
                         if (line == null || line.equals("BYE")) {
                             terminata = true;
+                            break;
                         }
 
                         System.out.println(line);
