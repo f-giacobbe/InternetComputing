@@ -23,7 +23,7 @@ public class TimeClient {
             socket.receive(packet);
 
             // Visualizza la risposta
-            String received = new String(packet.getData());
+            String received = new String(packet.getData(), 0, packet.getLength());
             System.out.printf("Response: %s%n", received);
         } catch (IOException e) {
             throw new RuntimeException(e);
