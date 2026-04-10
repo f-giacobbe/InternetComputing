@@ -17,17 +17,17 @@ public class TimeClientGeo {
             socket = new DatagramSocket();
 
             // L'utente sceglie la time zone
-            BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
-            System.out.print("Time Zone: ");
-            String timeZone = sc.readLine();
-
-            // Invia la richiesta
             /*
             ATTENZIONE: esempi di time zone valide sono:
                 Europe/Rome
                 America/Los_Angeles
                 Asia/Tokyo
              */
+            BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
+            System.out.print("Time Zone: ");
+            String timeZone = sc.readLine();
+
+            // Invia la richiesta
             byte[] buf = timeZone.getBytes();
             InetAddress address = InetAddress.getByName(hostname);
             DatagramPacket packet = new DatagramPacket(buf, buf.length, address, TimeServer.PORT);
