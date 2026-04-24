@@ -1,4 +1,4 @@
-package it.unical.dimes.reti.ese4;
+package it.unical.dimes.reti.ese3;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import java.net.URL;
 public class URLTest {
   public static void main(String[] args) {
     try {
-      URL url = new URL("http://www.dimes.unical.it");
+      URL url = new URL("http://www.dimes.unical.it/");
       //URL url = new URL("http://w3.org");
       BufferedReader in =
         new BufferedReader (new InputStreamReader(url.openStream()));

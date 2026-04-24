@@ -1,4 +1,4 @@
-package it.unical.dimes.reti.ese4;
+package it.unical.dimes.reti.ese3;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -15,7 +15,7 @@ public class MulticastTimeClient {
 			byte[] buf = new byte[256];
 			packet = new DatagramPacket(buf, buf.length);
 			socket.receive(packet);
-			String received = new String(packet.getData());
+			String received = new String(packet.getData(), 0, packet.getLength());
 			System.out.println("Time: " + received);
 		}
 		socket.leaveGroup(group);

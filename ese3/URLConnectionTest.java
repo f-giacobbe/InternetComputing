@@ -1,4 +1,4 @@
-package it.unical.dimes.reti.ese4;
+package it.unical.dimes.reti.ese3;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,7 +11,8 @@ public class URLConnectionTest {
 		try {
 			URL url = new URL("https://www.html.it/");
 			URLConnection connection = url.openConnection();
-			connection.connect();
+			connection.connect();								// Pretty much useless as the openConnection() method sets up for lazy loading (the first get... implies a connect()).
+																// Here we just force it to connect early and not lazily.
 			// print header fields
 			int n = 1;
 			String key;
