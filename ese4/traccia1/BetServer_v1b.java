@@ -1,4 +1,4 @@
-package it.unical.dimes.reti.traccia1;
+package it.unical.dimes.reti.ese4.traccia1;
 
 import java.io.BufferedReader;
 import java.io.IOException;

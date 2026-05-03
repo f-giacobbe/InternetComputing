@@ -1,18 +1,12 @@
-package it.unical.dimes.reti.traccia1sol2;
+package it.unical.dimes.reti.ese4.traccia1sol2;
 
-import it.unical.dimes.reti.traccia1.Scommessa;
+import it.unical.dimes.reti.ese4.traccia1.Scommessa;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketTimeoutException;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.LinkedList;

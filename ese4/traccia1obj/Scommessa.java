@@ -1,4 +1,4 @@
-package it.unical.dimes.reti.traccia1obj;
+package it.unical.dimes.reti.ese4.traccia1obj;
 
 import java.io.Serializable;
 import java.net.InetAddress;
