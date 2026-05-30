@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.Serializable;
 
 @RestController
-public class CompagniaController implements Serializable {
+public class CompagniaController {
     @Autowired
     private CompagniaService cs;
 

@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Service
-public class CompagniaService implements Serializable {
+public class CompagniaService {
     private List<Compagnia> compagnie;
 
     Compagnia compagniaPrezzoMin(String pId) {

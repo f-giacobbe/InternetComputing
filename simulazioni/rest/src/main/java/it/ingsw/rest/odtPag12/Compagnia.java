@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Data
-public class Compagnia implements Serializable {
+public class Compagnia {
     private int id;
 
     private String nome;

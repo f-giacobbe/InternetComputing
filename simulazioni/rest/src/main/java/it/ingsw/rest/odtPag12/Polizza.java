@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class Polizza implements Serializable {
+public class Polizza {
     private String id;
 
     private double premioAnnuo;

@@ -5,6 +5,6 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-public class ValoreTotaleResponse implements Serializable {
+public class ValoreTotaleResponse {
     private double valoreTotale;
 }
