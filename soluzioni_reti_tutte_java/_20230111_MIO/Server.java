@@ -1,6 +1,5 @@
 package it.unical.dimes.reti.soluzioni_reti_tutte_java._20230111_MIO;
 
-import it.unical.dimes.reti.soluzioni_reti_tutte_java._20230111.ThreadControlloSensori;
 import org.springframework.util.SerializationUtils;
 
 import java.io.IOException;
@@ -8,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 public class Server extends Thread {
@@ -17,7 +17,7 @@ public class Server extends Thread {
     static final String MULTICAST = "230.0.0.1";
     static final int PORTA_MULTICAST = 5000;
 
-    private final HashMap<String, Misura> misure = new HashMap<>();     // idSensore, Misura
+    private final ConcurrentHashMap<String, Misura> misure = new ConcurrentHashMap<>();     // idSensore, Misura
     private final Set<String> sensoriKaput = new HashSet<>();
 
     @Override
@@ -59,7 +59,6 @@ public class Server extends Thread {
             socket = s;
         }
 
-
         @Override
         public void run() {
             try (ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -85,9 +84,7 @@ public class Server extends Thread {
 
         @Override
         public void run() {
-            try {
-                MulticastSocket ms = new MulticastSocket();
-
+            try (MulticastSocket ms = new MulticastSocket()){
                 while (true) {
                     TimeUnit.MINUTES.sleep(1);      // Faccio il controllo ogni minuto e non in continuazione per non intasare il server
 
@@ -95,7 +92,7 @@ public class Server extends Thread {
                     boolean almenoUnNuovoSensoreNonFunzionante = false;
 
                     for (Misura m : misure.values()) {
-                        if (m.getTimestamp().getTimeInMillis() - adesso.getTimeInMillis() > DIECI_MINUTI_MS) {
+                        if (adesso.getTimeInMillis() - m.getTimestamp().getTimeInMillis() > DIECI_MINUTI_MS) {
                             sensoriKaput.add(m.getIdSensore());
                             almenoUnNuovoSensoreNonFunzionante = true;
                         }
@@ -127,7 +124,7 @@ public class Server extends Thread {
                     DatagramPacket packet = new DatagramPacket(buf, buf.length);
                     ds.receive(packet);
 
-                    Misura misura = (Misura) SerializationUtils.deserialize(buf);
+                    Misura misura = (Misura) SerializationUtils.deserialize(Arrays.copyOf(buf, packet.getLength()));
 
                     String sensore = misura.getIdSensore();
                     misure.put(sensore, misura);
