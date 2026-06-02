@@ -3,11 +3,18 @@ package it.unical.dimes.reti.ese8WSDL;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-public class ProdottiService {
+interface ProdottiService {
+    Prodotto prodottoPiuVenduto(String produttore);
+    ListaProdotti prodottiMaxIncasso(String magazzino);
+}
+
+
+class ProdottiServiceImpl implements ProdottiService {
     private HashMap<String, HashMap<Prodotto, Integer>> venditePerMagazzino;
                 //  magazzino,    prodotto,   vendite di prodotto in magazzino
 
 
+    @Override
     public Prodotto prodottoPiuVenduto(String produttore) {
         Prodotto piuVenduto = null;
         int venditeMax = 0;
@@ -30,6 +37,7 @@ public class ProdottiService {
         return piuVenduto;
     }
 
+    @Override
     public ListaProdotti prodottiMaxIncasso(String magazzino) {
         int n = 3;
         ListaProdotti res = new ListaProdotti();

@@ -1,8 +1,7 @@
-package it.unical.dimes.reti.soluzioni_reti_tutte_java._20230111_MIO;
+package it.unical.dimes.reti.soluzioni_reti_tutte_java._20230111_MIO.Es2;
 
 import org.springframework.util.SerializationUtils;
 
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.*;
