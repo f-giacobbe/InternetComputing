@@ -41,5 +41,7 @@ public class Sensore extends Thread {
 
     public static void main(String[] args) {
         new Sensore("1").start();
+        new Sensore("2").start();
+        new Sensore("3").start();
     }
 }
