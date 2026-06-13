@@ -44,7 +44,7 @@ public class OrtaggiService {
 
             if (count != 0) {
                 media = somma/count;
-            } else
+            }
 
             if (media < prezzoMedioMin) {
                 prezzoMedioMin = media;
